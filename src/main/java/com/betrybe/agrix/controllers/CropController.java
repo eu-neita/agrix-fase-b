@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  * Controller class for managing Crop entities.
  */
@@ -138,7 +137,9 @@ public class CropController {
    * Handles HTTP POST requests to add a new fertilizer to a crop.
    */
   @PostMapping("/crops/{cropId}/fertilizers/{fertilizerId}")
-  public ResponseEntity<String> addFertilizer(@PathVariable Long cropId, @PathVariable Long fertilizerId) {
+  public ResponseEntity<String> addFertilizer(
+      @PathVariable Long cropId,
+      @PathVariable Long fertilizerId) {
     String response = cropService.addFertilizer(cropId, fertilizerId);
     return ResponseEntity.created(null).body(response);
   }

@@ -56,5 +56,6 @@ public class FertilizerController {
     Fertilizer fertilizer = fertilizerService.getById(id);
     FertilizerDto dto = new FertilizerDto(fertilizer.getId(), fertilizer.getName(),
         fertilizer.getBrand(), fertilizer.getComposition());
-    return ResponseEntity.ok(dto);}
+    return ResponseEntity.ok(dto);
+  }
 }

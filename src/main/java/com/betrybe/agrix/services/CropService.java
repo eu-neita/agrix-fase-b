@@ -4,8 +4,8 @@ import com.betrybe.agrix.exeption.FertilizerException;
 import com.betrybe.agrix.models.entities.Crop;
 import com.betrybe.agrix.models.entities.Fertilizer;
 import com.betrybe.agrix.models.repositories.CropRepository;
-import com.betrybe.agrix.models.repositories.FertilizerRepository;
 import com.betrybe.agrix.models.repositories.FarmRepository;
+import com.betrybe.agrix.models.repositories.FertilizerRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +22,14 @@ public class CropService {
   private final FarmRepository farmRepository;
   private final FertilizerRepository fertilizerRepository;
 
+  /**
+   * Constructor.
+   */
   @Autowired
-  public CropService(CropRepository cropRepository, FarmRepository farmRepository, FertilizerRepository fertilizerRepository) {
+  public CropService(
+      CropRepository cropRepository,
+      FarmRepository farmRepository,
+      FertilizerRepository fertilizerRepository) {
     this.cropRepository = cropRepository;
     this.farmRepository = farmRepository;
     this.fertilizerRepository = fertilizerRepository;

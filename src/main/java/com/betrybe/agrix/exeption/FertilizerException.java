@@ -1,7 +1,7 @@
 package com.betrybe.agrix.exeption;
 
 /**
- *Exception.
+ * Exception.
  */
 public class FertilizerException extends RuntimeException {
 
