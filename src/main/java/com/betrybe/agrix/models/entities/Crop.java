@@ -1,8 +1,5 @@
 package com.betrybe.agrix.models.entities;
 
-
-
-import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.time.LocalDate;
 
 /**
  * Entity class representing a farm.
@@ -39,7 +37,13 @@ public class Crop {
   /**
    * Constructs a new Farm instance.
    */
-  public Crop(Long id, String name, double plantedArea, Farm farm, LocalDate plantedDate, LocalDate harvestDate) {
+  public Crop(
+      Long id,
+      String name,
+      double plantedArea,
+      Farm farm,
+      LocalDate plantedDate,
+      LocalDate harvestDate) {
     this.id = id;
     this.name = name;
     this.plantedArea = plantedArea;
