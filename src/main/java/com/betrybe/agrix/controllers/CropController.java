@@ -1,8 +1,10 @@
 package com.betrybe.agrix.controllers;
 
 import com.betrybe.agrix.controllers.dto.CropDto;
+import com.betrybe.agrix.controllers.dto.FertilizerDto;
 import com.betrybe.agrix.controllers.dto.ResponseDto;
 import com.betrybe.agrix.models.entities.Crop;
+import com.betrybe.agrix.models.entities.Fertilizer;
 import com.betrybe.agrix.services.CropService;
 import java.time.LocalDate;
 import java.util.List;
@@ -142,5 +144,14 @@ public class CropController {
       @PathVariable Long fertilizerId) {
     String response = cropService.addFertilizer(cropId, fertilizerId);
     return ResponseEntity.created(null).body(response);
+  }
+
+  /**
+   * Handles HTTP GET list of Fertilizers.
+   */
+  @GetMapping("/crops/{cropId}/fertilizers")
+  public ResponseEntity<List<FertilizerDto>> getFertilizers(@PathVariable Long cropId) {
+    List<Fertilizer> fertilizers = cropService.getFertilizers(cropId);
+    return ResponseEntity.status(HttpStatus.OK).body(FertilizerDto.toListDto(fertilizers));
   }
 }
