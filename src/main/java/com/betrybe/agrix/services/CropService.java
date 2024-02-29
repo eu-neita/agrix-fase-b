@@ -1,7 +1,10 @@
 package com.betrybe.agrix.services;
 
+import com.betrybe.agrix.exeption.FertilizerException;
 import com.betrybe.agrix.models.entities.Crop;
+import com.betrybe.agrix.models.entities.Fertilizer;
 import com.betrybe.agrix.models.repositories.CropRepository;
+import com.betrybe.agrix.models.repositories.FertilizerRepository;
 import com.betrybe.agrix.models.repositories.FarmRepository;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,11 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class CropService {
   private final CropRepository cropRepository;
   private final FarmRepository farmRepository;
+  private final FertilizerRepository fertilizerRepository;
 
   @Autowired
-  public CropService(CropRepository cropRepository, FarmRepository farmRepository) {
+  public CropService(CropRepository cropRepository, FarmRepository farmRepository, FertilizerRepository fertilizerRepository) {
     this.cropRepository = cropRepository;
     this.farmRepository = farmRepository;
+    this.fertilizerRepository = fertilizerRepository;
   }
 
   /**
@@ -62,5 +67,24 @@ public class CropService {
 
   public List<Crop> getCropByHarvestDateBetween(LocalDate start, LocalDate end) {
     return cropRepository.findAllByHarvestDateBetween(start, end);
+  }
+
+  /**
+   * Add new fertilizer.
+   */
+  public String addFertilizer(Long cropId, Long fertilizerId) {
+    Optional<Crop> cropOptional = cropRepository.findById(cropId);
+    Optional<Fertilizer> fertilizerOptional = fertilizerRepository.findById(fertilizerId);
+    if (cropOptional.isEmpty()) {
+      throw new FertilizerException("Plantação não encontrada!");
+    }
+    if (fertilizerOptional.isEmpty()) {
+      throw new FertilizerException("Fertilizante não encontrado!");
+    }
+    Crop crop = cropOptional.get();
+    Fertilizer fertilizer = fertilizerOptional.get();
+    crop.getFertilizers().add(fertilizer);
+    cropRepository.save(crop);
+    return "Fertilizante e plantação associados com sucesso!";
   }
 }

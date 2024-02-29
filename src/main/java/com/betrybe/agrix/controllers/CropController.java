@@ -133,4 +133,13 @@ public class CropController {
         .collect(Collectors.toList());
     return ResponseEntity.ok(cropDtos);
   }
+
+  /**
+   * Handles HTTP POST requests to add a new fertilizer to a crop.
+   */
+  @PostMapping("/crops/{cropId}/fertilizers/{fertilizerId}")
+  public ResponseEntity<String> addFertilizer(@PathVariable Long cropId, @PathVariable Long fertilizerId) {
+    String response = cropService.addFertilizer(cropId, fertilizerId);
+    return ResponseEntity.created(null).body(response);
+  }
 }

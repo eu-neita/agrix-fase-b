@@ -18,6 +18,6 @@ public record CropDto(
     LocalDate harvestDate) {
   public Crop toCrop(FarmRepository farmRepository) {
     Farm farm = farmRepository.findById(farmId).orElse(null);
-    return new Crop(id, name, plantedArea, farm, plantedDate, harvestDate);
+    return new Crop(id, name, plantedArea, farm, plantedDate, harvestDate, null);
   }
 }

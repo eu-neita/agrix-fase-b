@@ -56,13 +56,23 @@ public class Crop {
       double plantedArea,
       Farm farm,
       LocalDate plantedDate,
-      LocalDate harvestDate) {
+      LocalDate harvestDate,
+      List<Fertilizer> fertilizers) {
     this.id = id;
     this.name = name;
     this.plantedArea = plantedArea;
     this.farm = farm;
     this.plantedDate = plantedDate;
     this.harvestDate = harvestDate;
+    this.fertilizers = fertilizers;
+  }
+
+  public List<Fertilizer> getFertilizers() {
+    return fertilizers;
+  }
+
+  public void setFertilizers(List<Fertilizer> fertilizers) {
+    this.fertilizers = fertilizers;
   }
 
   public LocalDate getPlantedDate() {
