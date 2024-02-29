@@ -4,6 +4,7 @@ import com.betrybe.agrix.controllers.dto.CropDto;
 import com.betrybe.agrix.controllers.dto.ResponseDto;
 import com.betrybe.agrix.models.entities.Crop;
 import com.betrybe.agrix.services.CropService;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -111,6 +112,25 @@ public class CropController {
         crops.get().getFarm().getId(),
         crops.get().getPlantedDate(),
         crops.get().getHarvestDate());
+    return ResponseEntity.ok(cropDtos);
+  }
+
+  /**
+   * Handles HTTP GET requests to crops by planted date.
+   */
+  @GetMapping("/crops/search")
+  public ResponseEntity<List<CropDto>> getByPlantedDate(LocalDate start, LocalDate end) {
+    List<Crop> crops = cropService.getCropByHarvestDateBetween(start, end);
+
+    List<CropDto> cropDtos = crops.stream()
+        .map(crop -> new CropDto(
+            crop.getId(),
+            crop.getName(),
+            crop.getPlantedArea(),
+            crop.getFarm().getId(),
+            crop.getPlantedDate(),
+            crop.getHarvestDate()))
+        .collect(Collectors.toList());
     return ResponseEntity.ok(cropDtos);
   }
 
